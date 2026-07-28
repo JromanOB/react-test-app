@@ -10,7 +10,7 @@ const indexRoute = createRoute({
 });
 
 export const routeTree = rootRoute.addChildren([
-    indexRoute,
-    updateProductRoute,
-    createProductRoute,
+  indexRoute,
+  updateProductRoute,
+  createProductRoute,
 ]);

@@ -8,7 +8,7 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
       {field.state.meta.isTouched && !field.state.meta.isValid ? (
         <em>{field.state.meta.errors.join(',')}</em>
       ) : null}
-      {field.state.meta.isValidating ? 'Validating...' : null}
+      {field.state.meta.isValidating ? 'Validando...' : null}
     </>
   )
 }
@@ -42,9 +42,9 @@ function CreateProduct() {
           type="button"
           onClick={() => navigate({ to: '/' })}
         >
-          Go Back
+          Volver
         </button>
-        <h1>Create Product</h1>
+        <h1>Crear Producto</h1>
       </div>
       <form
         onSubmit={(e) => {
@@ -76,7 +76,7 @@ function CreateProduct() {
               // Avoid hasty abstractions. Render props are great!
               return (
                 <>
-                  <label htmlFor={field.name}>Name:</label>
+                  <label htmlFor={field.name}>Nombre:</label>
                   <input
                     id={field.name}
                     name={field.name}
@@ -95,7 +95,7 @@ function CreateProduct() {
             name="description"
             children={(field) => (
               <>
-                <label htmlFor={field.name}>Description:</label>
+                <label htmlFor={field.name}>Descripción:</label>
                 <input
                   id={field.name}
                   name={field.name}
@@ -113,7 +113,7 @@ function CreateProduct() {
             name="price"
             children={(field) => (
               <>
-                <label htmlFor={field.name}>Price:</label>
+                <label htmlFor={field.name}>Precio:</label>
                 <input
                   id={field.name}
                   name={field.name}
@@ -135,7 +135,7 @@ function CreateProduct() {
                 className="submit-button"
                 type="submit" 
                 disabled={!canSubmit}>
-                {isSubmitting ? '...' : 'Submit'}
+                {isSubmitting ? '...' : 'Enviar'}
               </button>
               <button
                 className="delete-button"
@@ -146,7 +146,7 @@ function CreateProduct() {
                   form.reset()
                 }}
               >
-                Reset
+                Reiniciar
               </button>
             </>
           )}

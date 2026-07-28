@@ -26,18 +26,18 @@ function ProductsTable() {
     getCoreRowModel: getCoreRowModel(),
   })
 
-  isLoading && <p>Loading data...</p>;
+  isLoading && <p>Cargando datos...</p>;
   error && <p>Error: {error.message}</p>;
   return (
     <div className="p-2">
       <div className="header-table">
-        <h1>Products Table</h1>
+        <h1>Tabla de Productos</h1>
         <button
           className="submit-button"
           type="button"
           onClick={() => navigate({ to: '/create-product' })}
         >
-          New Product
+          Nuevo Producto
         </button>
       </div>
       <div className="h-2" />

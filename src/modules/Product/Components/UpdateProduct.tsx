@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useForm } from "@tanstack/react-form"
 import { useGetProductById, useUpdateProduct } from "../Hooks/productHooks";
-import { updateProductRoute } from "../../../routes/Products/productsRoutes";
 import { useNavigate } from "@tanstack/react-router";
+import { updateProductRoute } from "../../../routes/Products/productsRoutes";
 
 function UpdateProduct() {
     const { productId } = updateProductRoute.useParams();
@@ -41,16 +41,16 @@ function UpdateProduct() {
     })
 
     // Cargar datos del producto cuando se obtienen
-    // useEffect(() => {
-    //     if (product) {
-    //         form.reset({
-    //             id: product.id,
-    //             name: product.name,
-    //             description: product.description,
-    //             price: product.price
-    //         })
-    //     }
-    // }, [product])
+    useEffect(() => {
+        if (product) {
+            form.reset({
+                id: product.id,
+                name: product.name,
+                description: product.description,
+                price: product.price
+            })
+        }
+    }, [product])
 
   return (
     <div>
@@ -60,9 +60,9 @@ function UpdateProduct() {
           type="button"
           onClick={() => navigate({ to: '/' })}
         >
-          Go Back
+          Volver al Inicio
         </button>
-        <h1>Update Product</h1>
+        <h1>Actualizar Producto</h1>
       </div>
       {isLoading && <p>Cargando producto...</p>}
       {error && <p style={{color: 'red'}}>Error cargando el producto</p>}
@@ -82,7 +82,7 @@ function UpdateProduct() {
               // Avoid hasty abstractions. Render props are great!
               return (
                 <>
-                  <label htmlFor={field.name}>Name:</label>
+                  <label htmlFor={field.name}>Nombre:</label>
                   <input
                     id={field.name}
                     name={field.name}
@@ -90,7 +90,6 @@ function UpdateProduct() {
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                  {/* <FieldInfo field={field} /> */}
                 </>
               )
             }}
@@ -101,7 +100,7 @@ function UpdateProduct() {
             name="description"
             children={(field) => (
               <>
-                <label htmlFor={field.name}>Description:</label>
+                <label htmlFor={field.name}>Descripción:</label>
                 <input
                   id={field.name}
                   name={field.name}
@@ -109,7 +108,6 @@ function UpdateProduct() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                 />
-                {/* <FieldInfo field={field} /> */} 
               </>
             )}
           />
@@ -119,7 +117,7 @@ function UpdateProduct() {
             name="price"
             children={(field) => (
               <>
-                <label htmlFor={field.name}>Price:</label>
+                <label htmlFor={field.name}>Precio:</label>
                 <input
                   id={field.name}
                   name={field.name}
@@ -128,7 +126,6 @@ function UpdateProduct() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(Number(e.target.value))}
                 />
-                {/* <FieldInfo field={field} /> */}
               </>
             )}
           />
@@ -141,7 +138,7 @@ function UpdateProduct() {
                 className="submit-button"
                 type="submit" 
                 disabled={!canSubmit}>
-                {isSubmitting ? '...' : 'Submit'}
+                {isSubmitting ? '...' : 'Enviar'}
               </button>
               <button
                 className="delete-button"
@@ -152,7 +149,7 @@ function UpdateProduct() {
                   form.reset()
                 }}
               >
-                Reset
+                Reiniciar
               </button>
             </>
           )}

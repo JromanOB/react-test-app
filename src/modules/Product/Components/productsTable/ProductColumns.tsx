@@ -16,23 +16,23 @@ export const getProductColumns = ({ onDelete, onUpdate }: ProductColumnsProps) =
   columnHelper.accessor((row) => row.name, {
     id: 'name',
     cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Name</span>,
+    header: () => <span>Nombre</span>,
     footer: (info) => info.column.id,
   }),
   columnHelper.accessor((row) => row.description, {
     id: 'description',
     cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Description</span>,
+    header: () => <span>Descripción</span>,
     footer: (info) => info.column.id,
   }),
   columnHelper.accessor('price', {
-    header: () => 'Price',
+    header: () => 'Precio',
     cell: (info) => info.renderValue(),
     footer: (info) => info.column.id,
   }),
   columnHelper.display({
     id: 'actions',
-    header: () => 'Actions',
+    header: () => 'Acciones',
     cell: (info) => (
       <div>
         <button
@@ -40,14 +40,14 @@ export const getProductColumns = ({ onDelete, onUpdate }: ProductColumnsProps) =
           type="button"
           onClick={() => onDelete(info.row.original.id)}
         >
-          Delete
+          Eliminar
         </button>
         <button
           className="update-button"
           type="button"
           onClick={() => onUpdate(info.row.original.id)}
         >
-          Update
+          Actualizar
         </button>
       </div>
     ),
