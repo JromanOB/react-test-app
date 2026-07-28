@@ -17,15 +17,15 @@ function UpdateProduct() {
 
     const form = useForm({
         defaultValues: {
-            id: product?.id,
-            name: product?.name || '',
-            description: product?.description || '',
-            price: product?.price || 0
+            id: 0,
+            name: '',
+            description: '',
+            price: 0
         },
         onSubmit: async ({ value }) => {
             try {
                 console.log('Submitting update for product:', value);
-                await updateProductMutation.mutateAsync({ id: productId, 
+                await updateProductMutation.mutateAsync({ id: Number(productId), 
                     data: { 
                         name: value.name, 
                         description: value.description, 
@@ -40,17 +40,16 @@ function UpdateProduct() {
         },
     })
 
-    // Cargar datos del producto cuando se obtienen
     useEffect(() => {
-        if (product) {
-            form.reset({
-                id: product.id,
-                name: product.name,
-                description: product.description,
-                price: product.price
-            })
-        }
-    }, [product])
+      if (!product) return;
+
+      form.reset({
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+      });
+    }, [product]);
 
   return (
     <div>
