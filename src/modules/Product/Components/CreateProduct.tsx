@@ -1,6 +1,7 @@
 import { AnyFieldApi, useForm } from "@tanstack/react-form"
 import { useCreateProduct } from "../Hooks/productHooks";
 import { useNavigate } from "@tanstack/react-router";
+import Swal from 'sweetalert2';
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -26,10 +27,18 @@ function CreateProduct() {
         onSubmit: async ({ value }) => {
             try {
                 await createProductMutation.mutateAsync(value)
-                alert('Product created successfully!')
+                Swal.fire({
+                  title: "Producto creado!",
+                  text: "El producto se ha creado exitosamente.",
+                  icon: "success"
+                })
                 form.reset()
             } catch (error) {
-                alert('Error creating product!')
+                Swal.fire({
+                  title: "Error!",
+                  text: "Hubo un error al crear el producto.",
+                  icon: "error"
+                })
             }
         },
     })

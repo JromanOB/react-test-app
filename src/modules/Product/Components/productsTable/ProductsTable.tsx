@@ -6,6 +6,7 @@ import {
 import { useGetAllProducts, useDeleteProduct, useUpdateProduct } from '../../Hooks/productHooks';
 import { getProductColumns } from './productColumns';
 import { useNavigate } from '@tanstack/react-router';
+import Swal from 'sweetalert2';
 
 function ProductsTable() {
   const { data, isLoading, error } = useGetAllProducts();
@@ -13,7 +14,24 @@ function ProductsTable() {
   const navigate = useNavigate();
 
   const handleDelete = (id: number) => {
-    deleteProductMutation.mutate(id);
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "¡Sí, bórralo!"
+    }).then((result) => {
+      if (result.isConfirmed){
+        Swal.fire({
+        title: "¡Eliminado!",
+        text: "El producto ha sido eliminado.",
+        icon: "success"
+        });
+        deleteProductMutation.mutate(id);
+      }
+    });
   };
 
   const handleUpdate = (id: number) => {

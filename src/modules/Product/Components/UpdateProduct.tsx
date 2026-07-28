@@ -3,6 +3,7 @@ import { useForm } from "@tanstack/react-form"
 import { useGetProductById, useUpdateProduct } from "../Hooks/productHooks";
 import { useNavigate } from "@tanstack/react-router";
 import { updateProductRoute } from "../../../routes/Products/productsRoutes";
+import Swal from 'sweetalert2';
 
 function UpdateProduct() {
     const { productId } = updateProductRoute.useParams();
@@ -23,20 +24,35 @@ function UpdateProduct() {
             price: 0
         },
         onSubmit: async ({ value }) => {
-            try {
-                console.log('Submitting update for product:', value);
-                await updateProductMutation.mutateAsync({ id: Number(productId), 
-                    data: { 
-                        name: value.name, 
-                        description: value.description, 
-                        price: value.price 
-                    } })
-                alert('Product updated successfully!');
-                goHome();
-                form.reset()
-            } catch (error) {
-                alert('Error updating product!')
-            }
+          try {
+            Swal.fire({
+              title: "¿Estás seguro de actualizar el producto?",
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: "Guardar",
+              denyButtonText: `No guardar`,
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed){
+                updateProductMutation.mutateAsync({ id: Number(productId), 
+                  data: { 
+                    name: value.name, 
+                    description: value.description, 
+                    price: value.price 
+                  } 
+                })
+                Swal.fire("¡Guardado!", "", "success");
+              } 
+              else if (result.isDenied) Swal.fire("Los cambios no se han guardado", "", "info");
+            });
+            form.reset()
+          } catch (error) {
+            Swal.fire({
+              title: "Error!",
+              text: "Hubo un error al actualizar el producto.",
+              icon: "error"
+            })
+          }
         },
     })
 
