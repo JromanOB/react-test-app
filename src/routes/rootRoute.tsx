@@ -1,5 +1,5 @@
 import { createRootRoute, createRoute, lazyRouteComponent } from "@tanstack/react-router";
-import { createProductRoute, productsRoute, updateProductRoute } from "./Products/productsRoutes";
+import { createProductRoute, productIndexRoute, productsRoute, updateProductRoute } from "./Products/productsRoutes";
 
 export const rootRoute = createRootRoute();
 
@@ -13,6 +13,7 @@ export const routeTree = rootRoute.addChildren([
   indexRoute,
   productsRoute.addChildren([
     updateProductRoute,
-    createProductRoute
+    createProductRoute,
+    productIndexRoute
   ])
 ]);

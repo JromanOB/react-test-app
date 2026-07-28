@@ -12,10 +12,6 @@ function UpdateProduct() {
 
     const navigate = useNavigate();
 
-    const goHome = () => {
-        navigate({ to: '/' });
-    }
-
     const form = useForm({
         defaultValues: {
             id: 0,
@@ -73,7 +69,7 @@ function UpdateProduct() {
         <button
           className="update-button"
           type="button"
-          onClick={() => navigate({ to: '/' })}
+          onClick={() => navigate({ to: '/products' })}
         >
           Volver al Inicio
         </button>

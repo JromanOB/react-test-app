@@ -1,12 +1,10 @@
-import { createRoute, lazyRouteComponent } from '@tanstack/react-router';
+import { createRoute, lazyRouteComponent, Outlet } from '@tanstack/react-router';
 import { rootRoute } from '../rootRoute';
-import UpdateProduct from '../../modules/Product/Components/UpdateProduct';
-import CreateProduct from '../../modules/Product/Components/createProduct';
 
 export const productsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "products",
-  component: lazyRouteComponent(() => import("../../modules/Product/Components/productsTable/ProductsTable")),
+  component: Outlet,
   // beforeLoad: async () => {
   //   const token = localStorage.getItem("token");
   //   if (!token) {
@@ -24,14 +22,20 @@ export const productsRoute = createRoute({
   // },
 });
 
+export const productIndexRoute = createRoute({
+  getParentRoute: () => productsRoute,
+  path: "/",
+  component: lazyRouteComponent(() => import("../../modules/Product/Components/BootstrapTable/ProductsBootstrapTable")),
+});
+
 export const updateProductRoute = createRoute({
   getParentRoute: () => productsRoute,
-  path: "/update-product/$productId",
-  component: UpdateProduct,
+  path: "update/$productId",
+  component: lazyRouteComponent(() => import("../../modules/Product/Components/UpdateProduct")),
 });
 
 export const createProductRoute = createRoute({
   getParentRoute: () => productsRoute,
-  path: "create-product",
-  component: CreateProduct,
+  path: "create",
+  component: lazyRouteComponent(() => import("../../modules/Product/Components/CreateProduct")),
 });

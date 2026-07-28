@@ -4,9 +4,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useGetAllProducts, useDeleteProduct, useUpdateProduct } from '../../Hooks/productHooks';
-import { getProductColumns } from './productColumns';
 import { useNavigate } from '@tanstack/react-router';
 import Swal from 'sweetalert2';
+import { getProductColumns } from './ProductColumns';
 
 function ProductsTable() {
   const { data, isLoading, error } = useGetAllProducts();
@@ -35,7 +35,7 @@ function ProductsTable() {
   };
 
   const handleUpdate = (id: number) => {
-    navigate({ to: `/update-product/${id}` });
+    navigate({ to: `/products/update/${id}` });
   };
 
   const table = useReactTable({
@@ -53,7 +53,7 @@ function ProductsTable() {
         <button
           className="submit-button"
           type="button"
-          onClick={() => navigate({ to: '/create-product' })}
+          onClick={() => navigate({ to: "/products/create" })}
         >
           Nuevo Producto
         </button>

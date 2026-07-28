@@ -1,11 +1,20 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createProduct, deleteProduct, getAllProducts, getProductById, updateProduct } from "../Services/productSv";
+import { createProduct, deleteProduct, getAll, getAllProducts, getProductById, updateProduct } from "../Services/productSv";
 import { Product, UpdateProduct } from "../Models/product";
 
 export const useGetAllProducts = () => {
     const {data: data, isLoading, error} = useQuery({
         queryKey: ['products'],
         queryFn: () => getAllProducts()
+    });
+
+    return { data, isLoading, error };
+}
+
+export const useGetAll = () => {
+    const {data: data, isLoading, error} = useQuery({
+        queryKey: ['products'],
+        queryFn: () => getAll()
     });
 
     return { data, isLoading, error };

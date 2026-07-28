@@ -49,7 +49,7 @@ function CreateProduct() {
         <button
           className="update-button"
           type="button"
-          onClick={() => navigate({ to: '/' })}
+          onClick={() => navigate({ to: '/products' })}
         >
           Volver
         </button>

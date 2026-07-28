@@ -97,6 +97,8 @@ function Login() {
               onChange: ({ value }) =>
                 !value
                   ? 'La contraseña es requerida'
+                    : value.length < 8
+                    ? 'La contraseña debe tener mínimo 8 caracteres!'
                     : undefined,
               onChangeAsyncDebounceMs: 500,
               onChangeAsync: async ({ value }) => {

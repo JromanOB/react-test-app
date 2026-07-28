@@ -23,6 +23,16 @@ export async function getAllProducts(): Promise<ProductsResponse> {
   }
 }
 
+export async function getAll(): Promise<Product[]> {
+  try{
+    const res = await apiAxios.get<Product[]>(`${BASE}/all`);
+    return res.data;
+  }catch(err){
+    console.error('Error fetching products', err);
+    return Promise.reject(err);
+  }
+}
+
 export async function getProductById(id: number): Promise<Product> {
   try{
     const res = await apiAxios.get<Product>(`${BASE}/${id}`);
