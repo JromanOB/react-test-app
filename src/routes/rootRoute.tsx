@@ -1,16 +1,18 @@
 import { createRootRoute, createRoute, lazyRouteComponent } from "@tanstack/react-router";
-import { createProductRoute, updateProductRoute } from "./Products/productsRoutes";
+import { createProductRoute, productsRoute, updateProductRoute } from "./Products/productsRoutes";
 
 export const rootRoute = createRootRoute();
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: lazyRouteComponent(() => import("../modules/Product/Components/productsTable/ProductsTable")),
+  component: lazyRouteComponent(() => import("../modules/Auth/Components/Login")),
 });
 
 export const routeTree = rootRoute.addChildren([
   indexRoute,
-  updateProductRoute,
-  createProductRoute,
+  productsRoute.addChildren([
+    updateProductRoute,
+    createProductRoute
+  ])
 ]);
