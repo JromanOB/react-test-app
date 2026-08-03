@@ -24,7 +24,7 @@ export const productsRoute = createRoute({
 export const productIndexRoute = createRoute({
   getParentRoute: () => productsRoute,
   path: "/",
-  component: lazyRouteComponent(() => import("../../modules/Product/Components/BootstrapTable/ProductsBootstrapTable")),
+  component: lazyRouteComponent(() => import("../../modules/Product/Pages/ProductPage")),
 });
 
 export const updateProductRoute = createRoute({

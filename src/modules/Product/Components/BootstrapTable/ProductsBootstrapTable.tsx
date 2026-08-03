@@ -16,7 +16,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "@tanstack/react-router";
 import { useDeleteProduct, useGetAll } from "../../Hooks/productHooks";
 import Swal from 'sweetalert2';
-import { getProductColumns } from "./ProductColumns";
+import { getProductColumns } from "./productColumns";
 
 export default function ProductsBootstrapTable() {
   const tableRef = useRef<HTMLTableElement>(null);
@@ -42,6 +42,7 @@ export default function ProductsBootstrapTable() {
         text: "¡No podrás revertir esto!",
         icon: "warning",
         showCancelButton: true,
+        cancelButtonText: "Cancelar",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "¡Sí, bórralo!"
@@ -98,7 +99,7 @@ export default function ProductsBootstrapTable() {
   }
 
   return (
-    <div className="container mt-3">
+    <div>
       <div className="header-table d-flex justify-content-between align-items-center mb-3">
         <h1>Tabla de Productos</h1>
 

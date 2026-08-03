@@ -1,4 +1,4 @@
-import { getActionColumn } from "./ActionColumn";
+import { getActionColumn } from "./actionColumn";
 
 type ProductColumnsProps = {
   table: any;
