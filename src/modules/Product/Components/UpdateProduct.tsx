@@ -5,8 +5,8 @@ import {
   useUpdateProduct,
 } from "../Hooks/productHooks";
 import { useNavigate } from "@tanstack/react-router";
-import { updateProductRoute } from "../../../routes/Products/productsRoutes";
 import Swal from "sweetalert2";
+import { updateProductRoute } from "../../../routes/Products/ProductRoutes";
 
 function UpdateProduct() {
   const { productId } = updateProductRoute.useParams();

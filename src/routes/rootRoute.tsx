@@ -1,5 +1,5 @@
 import { createRootRoute, createRoute, lazyRouteComponent } from "@tanstack/react-router";
-import { createProductRoute, productIndexRoute, productsRoute, updateProductRoute } from "./Products/productsRoutes";
+import { createProductRoute, productIndexRoute, productsRoute, updateProductRoute } from "./Products/ProductRoutes";
 
 export const rootRoute = createRootRoute();
 
