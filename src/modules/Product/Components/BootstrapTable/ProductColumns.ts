@@ -29,10 +29,11 @@ export function getProductColumns({
         title: "Detalles",
         colspan: 3,
       },
-      {
-        title: "Acciones",
-        rowspan: 2,
-      },
+      getActionColumn({
+        table,
+        onDelete,
+        onUpdate,
+      }),
     ],
 
     [
@@ -54,12 +55,6 @@ export function getProductColumns({
         sortable: true,
         align: "right",
       },
-
-      getActionColumn({
-        table,
-        onDelete,
-        onUpdate,
-      }),
     ],
   ];
 }

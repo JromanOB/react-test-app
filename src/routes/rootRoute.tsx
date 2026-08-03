@@ -6,14 +6,14 @@ export const rootRoute = createRootRoute();
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: lazyRouteComponent(() => import("../modules/Auth/Components/Login")),
+  component: lazyRouteComponent(() => import("../modules/Auth/Pages/Login")),
 });
 
 export const routeTree = rootRoute.addChildren([
   indexRoute,
   productsRoute.addChildren([
-    updateProductRoute,
     createProductRoute,
-    productIndexRoute
+    productIndexRoute,
+    updateProductRoute,
   ])
 ]);

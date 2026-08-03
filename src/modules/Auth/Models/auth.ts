@@ -6,3 +6,7 @@ export interface LoginObj {
 export interface tokenRes{
     access_token: string
 }
+
+export interface ValidateResponse {
+  valid: boolean;
+}

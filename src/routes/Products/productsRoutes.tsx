@@ -1,25 +1,24 @@
-import { createRoute, lazyRouteComponent, Outlet } from '@tanstack/react-router';
+import { createRoute, lazyRouteComponent, Outlet, redirect } from '@tanstack/react-router';
 import { rootRoute } from '../rootRoute';
+import { ValidateToken } from '../../modules/Auth/Services/authSv';
 
 export const productsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "products",
   component: Outlet,
-  // beforeLoad: async () => {
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     disconnectAppSocket();
-  //     throw redirect({ to: "/login" });
-  //   }
+ beforeLoad: async () => {
+   const token = localStorage.getItem("token");
+   if (!token) {
+     throw redirect({ to: "/" });
+   }
 
-  //   try {
-  //     await ValidateToken(token);
-  //   } catch {
-  //     disconnectAppSocket();
-  //     localStorage.removeItem("token");
-  //     throw redirect({ to: "/login" });
-  //   }
-  // },
+   try {
+     await ValidateToken(token);
+   } catch {
+     localStorage.removeItem("token");
+     throw redirect({ to: "/" });
+   }
+ },
 });
 
 export const productIndexRoute = createRoute({

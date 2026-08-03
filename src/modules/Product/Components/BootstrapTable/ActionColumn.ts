@@ -14,39 +14,47 @@ export function getActionColumn({
   return {
     field: "operate",
     title: "Acciones",
+    rowspan: 2,
     align: "center",
+    valign: "middle",
     clickToSelect: false,
 
     formatter: () => `
       <div class="d-flex justify-content-center gap-2">
-
         <button
+          type="button"
           class="btn btn-warning btn-sm update"
-          title="Editar">
+          title="Editar producto"
+        >
           <i class="bi bi-pencil-square"></i>
         </button>
 
         <button
+          type="button"
           class="btn btn-danger btn-sm delete"
-          title="Eliminar">
+          title="Eliminar producto"
+        >
           <i class="bi bi-trash"></i>
         </button>
-
       </div>
     `,
 
     events: {
-      "click .update": (_e: JQuery.Event, _value: any, row: any) => {
+      "click .update": (
+        event: JQuery.Event,
+        _value: unknown,
+        row: { id: number }
+      ) => {
+        event.stopPropagation();
         onUpdate?.(row.id);
       },
 
-      "click .delete": (_e: JQuery.Event, _value: any, row: any) => {
-        if (!confirm(`¿Eliminar ${row.name}?`)) return;
-
-        table.bootstrapTable("remove", {
-          field: "id",
-          values: [row.id],
-        });
+      "click .delete": (
+        event: JQuery.Event,
+        _value: unknown,
+        row: { id: number; name: string }
+      ) => {
+        event.stopPropagation();
 
         onDelete?.(row.id);
       },
