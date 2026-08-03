@@ -1,5 +1,5 @@
 export interface LoginObj {
-    email: string,
+    username: string,
     password: string
 }
 

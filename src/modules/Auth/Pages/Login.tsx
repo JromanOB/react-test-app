@@ -27,7 +27,7 @@ function Login() {
 
   const form = useForm({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
 
@@ -81,18 +81,11 @@ function Login() {
               >
                 <div className="mb-3">
                   <form.Field
-                    name="email"
+                    name="username"
                     validators={{
                       onChange: ({ value }) => {
                         if (!value.trim()) {
-                          return "El correo electrónico es obligatorio";
-                        }
-
-                        const emailRegex =
-                          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                        if (!emailRegex.test(value)) {
-                          return "Ingrese un correo electrónico válido";
+                          return "El nombre de usuario es obligatorio";
                         }
 
                         return undefined;
@@ -105,7 +98,7 @@ function Login() {
                           htmlFor={field.name}
                           className="form-label fw-semibold"
                         >
-                          Correo electrónico
+                          Nombre de usuario
                         </label>
 
                         <div className="input-group">
@@ -116,15 +109,15 @@ function Login() {
                           <input
                             id={field.name}
                             name={field.name}
-                            type="email"
-                            autoComplete="email"
+                            type="text"
+                            autoComplete="username"
                             className={`form-control ${
                               field.state.meta.isTouched &&
                               !field.state.meta.isValid
                                 ? "is-invalid"
                                 : ""
                             }`}
-                            placeholder="usuario@correo.com"
+                            placeholder="Ingrese su nombre de usuario"
                             value={field.state.value}
                             onBlur={field.handleBlur}
                             onChange={(event) =>

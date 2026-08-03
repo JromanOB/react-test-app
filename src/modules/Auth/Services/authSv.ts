@@ -3,7 +3,7 @@ import { LoginObj, tokenRes, ValidateResponse } from "../Models/auth";
 
 export async function login(obj: LoginObj): Promise<tokenRes> {
   try{
-    const { data } = await apiAxios.post(`login`, obj);
+    const { data } = await apiAxios.post(`/ldap/login`, obj);
     return data;
   }catch(err){
     console.error('Error login', err);

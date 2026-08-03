@@ -21,6 +21,7 @@ function ProductPage() {
           text: "Has cerrado sesión correctamente.",
           icon: "success"
           });
+          localStorage.removeItem("token");
           navigate({
             to: "/",
           });
