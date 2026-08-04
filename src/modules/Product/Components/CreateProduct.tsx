@@ -1,25 +1,9 @@
-import { AnyFieldApi, useForm } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { useCreateProduct } from "../Hooks/productHooks";
 import { useNavigate } from "@tanstack/react-router";
 import Swal from "sweetalert2";
-
-function FieldInfo({ field }: { field: AnyFieldApi }) {
-  return (
-    <>
-      {field.state.meta.isTouched && !field.state.meta.isValid && (
-        <div className="text-danger small mt-1">
-          {field.state.meta.errors.join(", ")}
-        </div>
-      )}
-
-      {field.state.meta.isValidating && (
-        <div className="text-secondary small mt-1">
-          Validando...
-        </div>
-      )}
-    </>
-  );
-}
+import { FieldInfo } from "../../../utils/Form/FieldInfo";
+import { ProductSchema } from "../Schemas/productSchema";
 
 function CreateProduct() {
   const createProductMutation = useCreateProduct();
@@ -30,6 +14,9 @@ function CreateProduct() {
       name: "",
       description: "",
       price: 0,
+    },
+    validators: {
+      onChange: ProductSchema
     },
 
     onSubmit: async ({ value }) => {
@@ -84,29 +71,7 @@ function CreateProduct() {
                 }}
               >
                 <div className="mb-3">
-                  <form.Field
-                    name="name"
-                    validators={{
-                      onChange: ({ value }) =>
-                        !value.trim()
-                          ? "El nombre es obligatorio"
-                          : value.length < 3
-                            ? "El nombre debe tener al menos 3 caracteres"
-                            : undefined,
-
-                      onChangeAsyncDebounceMs: 500,
-
-                      onChangeAsync: async ({ value }) => {
-                        await new Promise((resolve) =>
-                          setTimeout(resolve, 1000)
-                        );
-
-                        return value.toLowerCase().includes("error")
-                          ? 'El nombre no puede contener la palabra "error"'
-                          : undefined;
-                      },
-                    }}
-                  >
+                  <form.Field name="name">
                     {(field) => (
                       <>
                         <label
@@ -133,25 +98,14 @@ function CreateProduct() {
                             field.handleChange(e.target.value)
                           }
                         />
-
-                        <FieldInfo field={field} />
+                        <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>
                 </div>
 
                 <div className="mb-3">
-                  <form.Field
-                    name="description"
-                    validators={{
-                      onChange: ({ value }) =>
-                        !value.trim()
-                          ? "La descripción es obligatoria"
-                          : value.length < 5
-                            ? "La descripción debe tener al menos 5 caracteres"
-                            : undefined,
-                    }}
-                  >
+                  <form.Field name="description">
                     {(field) => (
                       <>
                         <label
@@ -178,23 +132,14 @@ function CreateProduct() {
                             field.handleChange(e.target.value)
                           }
                         />
-
-                        <FieldInfo field={field} />
+                        <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>
                 </div>
 
                 <div className="mb-4">
-                  <form.Field
-                    name="price"
-                    validators={{
-                      onChange: ({ value }) =>
-                        value <= 0
-                          ? "El precio debe ser mayor que cero"
-                          : undefined,
-                    }}
-                  >
+                  <form.Field name="price">
                     {(field) => (
                       <>
                         <label
@@ -229,8 +174,7 @@ function CreateProduct() {
                             }
                           />
                         </div>
-
-                        <FieldInfo field={field} />
+                        <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>

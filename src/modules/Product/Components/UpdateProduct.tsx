@@ -7,6 +7,8 @@ import {
 import { useNavigate } from "@tanstack/react-router";
 import Swal from "sweetalert2";
 import { updateProductRoute } from "../../../routes/Products/ProductRoutes";
+import { FieldInfo } from "../../../utils/Form/FieldInfo";
+import { UpdateProductSchema } from "../Schemas/updateProductSchema";
 
 function UpdateProduct() {
   const { productId } = updateProductRoute.useParams();
@@ -26,6 +28,9 @@ function UpdateProduct() {
       name: "",
       description: "",
       price: 0,
+    },
+    validators: {
+      onChange: UpdateProductSchema
     },
 
     onSubmit: async ({ value }) => {
@@ -161,17 +166,7 @@ function UpdateProduct() {
                 }}
               >
                 <div className="mb-3">
-                  <form.Field
-                    name="name"
-                    validators={{
-                      onChange: ({ value }) =>
-                        !value.trim()
-                          ? "El nombre es obligatorio"
-                          : value.trim().length < 3
-                            ? "El nombre debe tener al menos 3 caracteres"
-                            : undefined,
-                    }}
-                  >
+                  <form.Field name="name">
                     {(field) => (
                       <>
                         <label
@@ -198,30 +193,14 @@ function UpdateProduct() {
                             field.handleChange(event.target.value)
                           }
                         />
-
-                        {field.state.meta.isTouched &&
-                          !field.state.meta.isValid && (
-                            <div className="invalid-feedback">
-                              {field.state.meta.errors.join(", ")}
-                            </div>
-                          )}
+                        <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>
                 </div>
 
                 <div className="mb-3">
-                  <form.Field
-                    name="description"
-                    validators={{
-                      onChange: ({ value }) =>
-                        !value.trim()
-                          ? "La descripción es obligatoria"
-                          : value.trim().length < 5
-                            ? "La descripción debe tener al menos 5 caracteres"
-                            : undefined,
-                    }}
-                  >
+                  <form.Field name="description">
                     {(field) => (
                       <>
                         <label
@@ -248,28 +227,14 @@ function UpdateProduct() {
                             field.handleChange(event.target.value)
                           }
                         />
-
-                        {field.state.meta.isTouched &&
-                          !field.state.meta.isValid && (
-                            <div className="invalid-feedback">
-                              {field.state.meta.errors.join(", ")}
-                            </div>
-                          )}
+                        <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>
                 </div>
 
                 <div className="mb-4">
-                  <form.Field
-                    name="price"
-                    validators={{
-                      onChange: ({ value }) =>
-                        value <= 0
-                          ? "El precio debe ser mayor que cero"
-                          : undefined,
-                    }}
-                  >
+                  <form.Field name="price">
                     {(field) => (
                       <>
                         <label
@@ -302,14 +267,8 @@ function UpdateProduct() {
                               )
                             }
                           />
-
-                          {field.state.meta.isTouched &&
-                            !field.state.meta.isValid && (
-                              <div className="invalid-feedback">
-                                {field.state.meta.errors.join(", ")}
-                              </div>
-                            )}
                         </div>
+                        <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>

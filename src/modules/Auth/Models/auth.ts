@@ -1,4 +1,4 @@
-export interface LoginObj {
+export interface Login {
     username: string,
     password: string
 }

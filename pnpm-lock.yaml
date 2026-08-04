@@ -47,6 +47,9 @@ importers:
       tableexport.jquery.plugin:
         specifier: ^1.33.0
         version: 1.33.0
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1

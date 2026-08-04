@@ -2,24 +2,26 @@ import { AnyFieldApi, useForm } from "@tanstack/react-form";
 import { useNavigate } from "@tanstack/react-router";
 import { useLogin } from "../Hooks/authHooks";
 import Swal from "sweetalert2";
+import { LoginSchema } from "../Schemas/loginSchema";
+import { FieldInfo } from "../../../utils/Form/FieldInfo";
 
-function FieldInfo({ field }: { field: AnyFieldApi }) {
-  return (
-    <>
-      {field.state.meta.isTouched && !field.state.meta.isValid && (
-        <div className="invalid-feedback d-block">
-          {field.state.meta.errors.join(", ")}
-        </div>
-      )}
+// function FieldInfo({ field }: { field: AnyFieldApi }) {
+//   return (
+//     <>
+//       {field.state.meta.isTouched && !field.state.meta.isValid && (
+//         <div className="invalid-feedback d-block">
+//           {field.state.meta.errors.join(", ")}
+//         </div>
+//       )}
 
-      {field.state.meta.isValidating && (
-        <div className="text-secondary small mt-1">
-          Validando...
-        </div>
-      )}
-    </>
-  );
-}
+//       {field.state.meta.isValidating && (
+//         <div className="text-secondary small mt-1">
+//           Validando...
+//         </div>
+//       )}
+//     </>
+//   );
+// }
 
 function Login() {
   const loginMutation = useLogin();
@@ -30,7 +32,9 @@ function Login() {
       username: "",
       password: "",
     },
-
+    validators: {
+      onChange: LoginSchema
+    },
     onSubmit: async ({ value }) => {
       try {
         await loginMutation.mutateAsync(value);
@@ -80,18 +84,7 @@ function Login() {
                 }}
               >
                 <div className="mb-3">
-                  <form.Field
-                    name="username"
-                    validators={{
-                      onChange: ({ value }) => {
-                        if (!value.trim()) {
-                          return "El nombre de usuario es obligatorio";
-                        }
-
-                        return undefined;
-                      },
-                    }}
-                  >
+                  <form.Field name="username">
                     {(field) => (
                       <>
                         <label
@@ -125,25 +118,14 @@ function Login() {
                             }
                           />
                         </div>
-
-                        <FieldInfo field={field} />
+                          <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>
                 </div>
 
                 <div className="mb-4">
-                  <form.Field
-                    name="password"
-                    validators={{
-                      onChange: ({ value }) =>
-                        !value
-                          ? "La contraseña es obligatoria"
-                          : value.length < 8
-                            ? "La contraseña debe tener al menos 8 caracteres"
-                            : undefined,
-                    }}
-                  >
+                  <form.Field name="password">
                     {(field) => (
                       <>
                         <label
@@ -176,9 +158,9 @@ function Login() {
                               field.handleChange(event.target.value)
                             }
                           />
+                          
                         </div>
-
-                        <FieldInfo field={field} />
+                        <FieldInfo field={field}></FieldInfo>
                       </>
                     )}
                   </form.Field>
