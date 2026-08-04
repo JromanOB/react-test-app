@@ -22,9 +22,7 @@ function ProductPage() {
           icon: "success"
           });
           localStorage.removeItem("token");
-          navigate({
-            to: "/",
-          });
+          navigate({ to: "/", });
         }
       });
         

@@ -6,19 +6,20 @@ export const productsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "products",
   component: Outlet,
- beforeLoad: async () => {
-   const token = localStorage.getItem("token");
-   if (!token) {
-     throw redirect({ to: "/" });
-   }
 
-   try {
-     await ValidateToken(token);
-   } catch {
-     localStorage.removeItem("token");
-     throw redirect({ to: "/" });
-   }
- },
+  beforeLoad: async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw redirect({ to: "/" });
+    }
+
+    try {
+      await ValidateToken(token);
+    } catch {
+      localStorage.removeItem("token");
+      throw redirect({ to: "/" });
+    }
+  },
 });
 
 export const productIndexRoute = createRoute({

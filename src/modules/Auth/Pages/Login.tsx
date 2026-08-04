@@ -52,7 +52,7 @@ function Login() {
 
         Swal.fire({
           title: "Error al iniciar sesión",
-          text: "Verifique su correo electrónico y contraseña.",
+          text: "Verifique su nombre de usuario y contraseña.",
           icon: "error",
           confirmButtonText: "Aceptar",
         });
